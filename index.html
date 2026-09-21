@@ -44,25 +44,20 @@
     .login-logo {
       width: 160px; height: 160px;
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.2rem;
-      flex-shrink: 0;
+      margin-bottom: 1.2rem; flex-shrink: 0;
     }
     .login-logo img {
-      width: 100%; height: 100%;
-      object-fit: contain;
-      display: block;
+      width: 100%; height: 100%; object-fit: contain; display: block;
       filter: drop-shadow(0 8px 20px rgba(122, 77, 31, 0.12));
     }
     .login-title {
       font-size: 1.7rem; font-weight: 800;
       color: #7a4d1f; letter-spacing: -0.5px;
-      margin-bottom: 1.5rem;
-      text-align: center;
+      margin-bottom: 1.5rem; text-align: center;
     }
     .login-form {
       width: 100%; max-width: 340px;
-      background: #fffaf4;
-      border-radius: 18px;
+      background: #fffaf4; border-radius: 18px;
       padding: 1.4rem 1.2rem;
       border: 1px solid #f3d9b1;
       box-shadow: 0 12px 30px rgba(122, 77, 31, 0.1);
@@ -70,8 +65,7 @@
     .login-field { margin-bottom: 0.9rem; }
     .login-field label {
       display: block; font-size: 0.72rem;
-      font-weight: 600; color: #6b563e;
-      margin-bottom: 0.25rem;
+      font-weight: 600; color: #6b563e; margin-bottom: 0.25rem;
     }
     .login-field input {
       width: 100%; padding: 0.7rem 0.8rem;
@@ -101,8 +95,7 @@
     .login-error.visible { display: block; }
     .login-hint {
       font-size: 0.65rem; color: #a58c6d;
-      text-align: center; margin-top: 0.8rem;
-      line-height: 1.4;
+      text-align: center; margin-top: 0.8rem; line-height: 1.4;
     }
 
     /* LANDING */
@@ -118,8 +111,8 @@
     .landing-logo {
       width: 150px; height: 150px;
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.2rem;
-      overflow: hidden; animation: floatIn 0.8s ease-out;
+      margin-bottom: 1.2rem; overflow: hidden;
+      animation: floatIn 0.8s ease-out;
     }
     .landing-logo img {
       width: 100%; height: 100%; object-fit: contain; display: block;
@@ -163,70 +156,72 @@
     }
     .logout-btn:active { background: #f5e8d5; }
 
-    /* Panel de diagnóstico (solo visible si hay error) */
     .diag-panel {
-      display: none;
-      background: #fbe4e0;
+      display: none; background: #fbe4e0;
       border: 1px solid #f0c0b8;
-      border-radius: 10px;
-      padding: 0.6rem 0.8rem;
-      font-size: 0.68rem;
-      color: #8a2a1f;
+      border-radius: 10px; padding: 0.6rem 0.8rem;
+      font-size: 0.68rem; color: #8a2a1f;
       margin: 0 0.2rem 0.6rem;
-      line-height: 1.4;
-      word-break: break-word;
+      line-height: 1.4; word-break: break-word;
     }
     .diag-panel.visible { display: block; }
-    .diag-panel .title {
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .diag-panel code {
-      background: rgba(255, 255, 255, 0.6);
-      padding: 1px 4px;
-      border-radius: 4px;
-      font-size: 0.62rem;
-    }
+    .diag-panel .title { font-weight: 700; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 4px; }
+    .diag-panel code { background: rgba(255, 255, 255, 0.6); padding: 1px 4px; border-radius: 4px; font-size: 0.62rem; }
 
-    /* Solo logo, sin texto */
     .logo-area {
       display: flex; justify-content: center; align-items: center;
       margin: 0.5rem 0 1rem;
     }
     .logo-placeholder {
-      height: 70px;
-      display: flex; align-items: center; justify-content: center;
-      padding: 0 0.5rem;
-      overflow: hidden;
+      height: 70px; display: flex; align-items: center; justify-content: center;
+      padding: 0 0.5rem; overflow: hidden;
     }
     .logo-placeholder img {
-      height: 100%; width: auto;
-      object-fit: contain;
-      display: block;
+      height: 100%; width: auto; object-fit: contain; display: block;
       filter: drop-shadow(0 4px 12px rgba(122, 77, 31, 0.08));
     }
 
+    /* RESUMEN DESPLEGABLE */
     .summary-card {
       background: linear-gradient(135deg, #fff6ec 0%, #ffe9d1 100%);
-      border-radius: 18px; padding: 0.9rem 1rem;
-      border: 1px solid #f0d6b6; margin-bottom: 1rem;
+      border-radius: 18px; margin-bottom: 1rem;
+      border: 1px solid #f0d6b6;
       box-shadow: 0 4px 10px rgba(122, 77, 31, 0.06);
+      overflow: hidden;
     }
-    .summary-title {
+    .summary-header {
+      padding: 0.85rem 1rem 0.6rem;
+      cursor: pointer; user-select: none;
+      transition: background 0.15s ease;
+    }
+    .summary-header:active { background: rgba(255, 255, 255, 0.35); }
+    .summary-header-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 0.55rem;
+    }
+    .summary-header-left {
+      display: flex; align-items: center; gap: 6px;
       font-size: 0.72rem; text-transform: uppercase;
       letter-spacing: 0.6px; color: #a5723e; font-weight: 700;
-      margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between; gap: 4px;
     }
-    .summary-title .alert-badge {
+    .summary-header-right {
+      display: flex; align-items: center; gap: 6px;
+    }
+    .summary-header-right .alert-badge {
       font-size: 0.6rem; background: #ff8c42; color: white;
       padding: 2px 8px; border-radius: 10px; font-weight: 700;
       letter-spacing: 0.3px; display: none; align-items: center; gap: 3px;
     }
-    .summary-title .alert-badge.visible { display: inline-flex; }
-    .summary-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem; margin-bottom: 0.55rem; }
+    .summary-header-right .alert-badge.visible { display: inline-flex; }
+    .summary-chevron {
+      font-size: 0.7rem; color: #a5723e;
+      transition: transform 0.25s ease;
+      display: inline-block;
+    }
+    .summary-card.open .summary-chevron { transform: rotate(180deg); }
+
+    /* Siempre visibles: 3 números en la cabecera */
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem; }
     .summary-item {
       text-align: center; padding: 0.35rem 0.2rem;
       background: rgba(255, 255, 255, 0.65);
@@ -237,7 +232,23 @@
     .summary-item.income .val { color: #1f6f8b; }
     .summary-item.expense .val { color: #b34e12; }
 
-    .balance-bar-wrap { background: rgba(255, 255, 255, 0.6); border-radius: 10px; padding: 0.5rem 0.7rem 0.6rem; border: 1px solid rgba(240, 214, 182, 0.7); }
+    .summary-body {
+      display: none;
+      padding: 0.6rem 1rem 1rem;
+      border-top: 1px solid rgba(240, 214, 182, 0.6);
+    }
+    .summary-card.open .summary-body { display: block; animation: slideDown 0.22s ease; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .balance-bar-wrap {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 10px; padding: 0.5rem 0.7rem 0.6rem;
+      border: 1px solid rgba(240, 214, 182, 0.7);
+      margin-bottom: 0.6rem;
+    }
     .balance-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem; }
     .balance-row .lbl { font-size: 0.7rem; font-weight: 700; color: #6b563e; letter-spacing: 0.2px; }
     .balance-row .val { font-size: 1.15rem; font-weight: 800; font-variant-numeric: tabular-nums; }
@@ -249,6 +260,92 @@
     .progress-fill.positive { background: linear-gradient(90deg, #4c9b6a, #2e7d4f); }
     .balance-hint { font-size: 0.62rem; color: #a58c6d; margin-top: 0.35rem; text-align: center; font-style: italic; line-height: 1.3; }
 
+    /* CALENDARIO */
+    .calendar-wrap {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 12px;
+      padding: 0.7rem 0.5rem 0.6rem;
+      border: 1px solid rgba(240, 214, 182, 0.8);
+    }
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.55rem;
+      padding: 0 0.3rem;
+    }
+    .calendar-title {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #a5723e;
+      font-weight: 700;
+    }
+    .calendar-total {
+      font-size: 0.62rem;
+      color: #8b6d4b;
+      font-weight: 600;
+    }
+    .calendar-total strong { color: #7a4d1f; font-weight: 800; }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.25rem;
+    }
+    .calendar-day {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      padding: 0.3rem 0.15rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid transparent;
+      min-height: 72px;
+    }
+    .calendar-day.today {
+      background: #fff2df;
+      border-color: #e0c9a8;
+    }
+    .calendar-day .day-label {
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: #a5723e;
+      letter-spacing: 0.3px;
+    }
+    .calendar-day .day-total {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #3d2b1a;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+      min-height: 0.85rem;
+    }
+    .calendar-day .day-total.empty { color: #d5c4b0; font-weight: 600; }
+    .calendar-day .day-products {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+      width: 100%;
+      margin-top: 1px;
+    }
+    .calendar-day .day-products .prod-count {
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: #7b6bc4;
+      background: #f0ecfa;
+      border-radius: 6px;
+      padding: 0 4px;
+      line-height: 1.3;
+      font-variant-numeric: tabular-nums;
+    }
+    .calendar-day.today .day-products .prod-count {
+      background: #e8e0f8;
+    }
+
+    /* TARJETAS DE PRODUCTO */
     .product-card {
       background: white; border-radius: 16px; overflow: hidden;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
@@ -295,9 +392,64 @@
     .stock-alert-badge.out { background: #c0392b; }
     @keyframes pulseAlert { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
 
+    /* MINI METAS (siempre visibles) */
+    .goals-mini {
+      padding: 0.4rem 0.7rem 0.5rem;
+      background: #fffaf4;
+      border-top: 1px solid #f8ede0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .goal-mini-row {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .goal-mini-label {
+      font-size: 0.55rem;
+      font-weight: 800;
+      color: #a5723e;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      width: 28px;
+      text-align: left;
+    }
+    .goal-mini-track {
+      flex: 1;
+      height: 8px;
+      background: #f0e0cc;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .goal-mini-fill {
+      height: 100%;
+      border-radius: 10px;
+      width: 0%;
+      transition: width 0.4s ease, background 0.3s ease;
+      background: #d99a5b;
+    }
+    .goal-mini-fill.weekly { background: linear-gradient(90deg, #7b6bc4, #5a4aa8); }
+    .goal-mini-fill.weekly.complete { background: linear-gradient(90deg, #4c9b6a, #2e7d4f); }
+    .goal-mini-fill.monthly { background: linear-gradient(90deg, #d99a5b, #a5672c); }
+    .goal-mini-fill.monthly.complete { background: linear-gradient(90deg, #4c9b6a, #2e7d4f); }
+    .goal-mini-value {
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: #6b563e;
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+      min-width: 82px;
+      text-align: right;
+      letter-spacing: -0.2px;
+    }
+    .goal-mini-value.complete { color: #2e7d4f; font-weight: 800; }
+    .goal-mini-value.no-goal { color: #c9b9a5; font-weight: 500; font-style: italic; }
+
     .actions-panel { display: none; background: #fffaf4; border-top: 1px solid #f3e3d1; padding: 0.7rem 0.7rem 0.85rem; }
     .actions-panel.open { display: block; animation: slideDown 0.22s ease; }
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
     .actions-row { display: flex; gap: 0.4rem; margin-bottom: 0.55rem; align-items: stretch; }
     .action-btn {
       border: none; border-radius: 11px; padding: 0.55rem 0.3rem;
@@ -322,26 +474,33 @@
     .pstat.cost .val { color: #b34e12; }
     .pstat.profit .val { color: #2e7d4f; }
 
-    .product-alert-config {
+    .product-config-grid {
+      display: flex; flex-direction: column; gap: 0.4rem;
+      margin-bottom: 0.55rem;
+    }
+    .product-config-row {
       display: flex; align-items: center; justify-content: space-between;
       gap: 0.5rem; padding: 0.5rem 0.65rem;
       background: #fffaf4; border: 1px dashed #e0c9a8;
-      border-radius: 10px; margin-bottom: 0.55rem;
+      border-radius: 10px;
     }
-    .product-alert-config .cfg-label { font-size: 0.68rem; font-weight: 600; color: #6b563e; display: flex; align-items: center; gap: 5px; line-height: 1.2; }
-    .product-alert-config .cfg-label .icon { font-size: 0.9rem; }
-    .product-alert-config .cfg-input-wrap { display: flex; align-items: center; gap: 0.3rem; flex-shrink: 0; }
-    .product-alert-config input {
-      width: 52px; padding: 0.35rem 0.4rem; border-radius: 8px;
+    .product-config-row .cfg-label {
+      font-size: 0.68rem; font-weight: 600; color: #6b563e;
+      display: flex; align-items: center; gap: 5px; line-height: 1.2;
+    }
+    .product-config-row .cfg-label .icon { font-size: 0.9rem; }
+    .product-config-row .cfg-input-wrap { display: flex; align-items: center; gap: 0.3rem; flex-shrink: 0; }
+    .product-config-row input {
+      width: 62px; padding: 0.35rem 0.4rem; border-radius: 8px;
       border: 1.5px solid #e6d5c0; background: white;
-      font-size: 0.85rem; font-weight: 700; font-family: inherit;
+      font-size: 0.8rem; font-weight: 700; font-family: inherit;
       color: #7a4d1f; text-align: center; outline: none;
       -moz-appearance: textfield;
     }
-    .product-alert-config input::-webkit-outer-spin-button,
-    .product-alert-config input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-    .product-alert-config input:focus { border-color: #c99b6a; }
-    .product-alert-config .cfg-unit { font-size: 0.65rem; color: #a58c6d; font-weight: 600; }
+    .product-config-row input::-webkit-outer-spin-button,
+    .product-config-row input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .product-config-row input:focus { border-color: #c99b6a; }
+    .product-config-row .cfg-unit { font-size: 0.6rem; color: #a58c6d; font-weight: 600; }
 
     .delete-product-row { display: flex; justify-content: flex-end; }
     .delete-product-btn {
@@ -389,6 +548,9 @@
       outline: none; transition: border-color 0.15s ease;
     }
     .modal-field input:focus, .modal-field select:focus { border-color: #c99b6a; }
+    .modal-row-2 {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;
+    }
     .modal-preview { background: #fff6ec; border-radius: 10px; padding: 0.55rem 0.7rem; margin-bottom: 0.7rem; font-size: 0.75rem; color: #6b563e; border: 1px solid #f0dfcd; }
     .modal-preview strong { color: #7a4d1f; font-variant-numeric: tabular-nums; }
     .modal-actions { display: flex; gap: 0.5rem; margin-top: 0.9rem; }
@@ -462,6 +624,7 @@
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     .toast.alert { background: #ff8c42; }
     .toast.danger { background: #c0392b; }
+    .toast.success { background: #2e7d4f; }
   </style>
 </head>
 <body>
@@ -471,7 +634,6 @@
       <img src="assets/mainlogo.png" alt="DonKenjito" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-size:4rem\'>🐱</span>';">
     </div>
     <div class="login-title">DonKenjito</div>
-
     <div class="login-form">
       <div class="login-field">
         <label for="loginEmail">Correo electrónico</label>
@@ -483,9 +645,7 @@
       </div>
       <button class="login-btn" id="loginBtn">Ingresar</button>
       <div class="login-error" id="loginError"></div>
-      <div class="login-hint">
-        Acceso restringido · Solo cuentas autorizadas
-      </div>
+      <div class="login-hint">Acceso restringido · Solo cuentas autorizadas</div>
     </div>
   </div>
 
@@ -506,54 +666,69 @@
         <span id="syncText">Conectando…</span>
       </div>
       <button class="logout-btn" id="logoutBtn">
-        <span>↩</span>
-        <span>Cerrar sesión</span>
+        <span>↩</span><span>Cerrar sesión</span>
       </button>
     </div>
 
-    <!-- Panel de diagnóstico (solo se muestra si hay error) -->
     <div class="diag-panel" id="diagPanel">
       <div class="title">⚠️ Problema de conexión</div>
       <div id="diagMsg"></div>
     </div>
 
-    <!-- Solo logo, sin texto -->
     <div class="logo-area">
       <div class="logo-placeholder">
         <img src="assets/mainlogo.png" alt="DonKenjito" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-size:2rem\'>🐱</span>';">
       </div>
     </div>
 
-    <div class="summary-card">
-      <div class="summary-title">
-        <span>📊 Resumen del negocio</span>
-        <span class="alert-badge" id="alertBadge">⚠️ 0 alertas</span>
-      </div>
-      <div class="summary-grid">
-        <div class="summary-item income">
-          <span class="lbl">Ingresos</span>
-          <span class="val" id="globalIncome">$0</span>
+    <!-- RESUMEN DESPLEGABLE: los 3 números SIEMPRE visibles -->
+    <div class="summary-card" id="summaryCard">
+      <div class="summary-header" id="summaryHeader">
+        <div class="summary-header-top">
+          <div class="summary-header-left">
+            <span>📊 Resumen del negocio</span>
+          </div>
+          <div class="summary-header-right">
+            <span class="alert-badge" id="alertBadge">⚠️ 0 alertas</span>
+            <span class="summary-chevron">▼</span>
+          </div>
         </div>
-        <div class="summary-item expense">
-          <span class="lbl">Gastos</span>
-          <span class="val" id="globalExpense">$0</span>
-        </div>
-        <div class="summary-item">
-          <span class="lbl">Balance</span>
-          <span class="val" id="globalBalanceTop">$0</span>
+
+        <!-- Estos 3 números están SIEMPRE visibles -->
+        <div class="summary-grid">
+          <div class="summary-item income">
+            <span class="lbl">Ingresos</span>
+            <span class="val" id="globalIncome">$0</span>
+          </div>
+          <div class="summary-item expense">
+            <span class="lbl">Gastos</span>
+            <span class="val" id="globalExpense">$0</span>
+          </div>
+          <div class="summary-item">
+            <span class="lbl">Balance</span>
+            <span class="val" id="globalBalanceTop">$0</span>
+          </div>
         </div>
       </div>
 
-      <div class="balance-bar-wrap">
-        <div class="balance-row">
-          <span class="lbl">Balance neto acumulado</span>
-          <span class="val zero" id="globalBalance">$0</span>
+      <div class="summary-body">
+        <div class="balance-bar-wrap">
+          <div class="balance-row">
+            <span class="lbl">Balance neto acumulado</span>
+            <span class="val zero" id="globalBalance">$0</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="balance-hint" id="balanceHint">Agrega tu primer producto para comenzar.</div>
         </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <div class="balance-hint" id="balanceHint">
-          Agrega tu primer producto para comenzar.
+
+        <div class="calendar-wrap" id="calendarWrap">
+          <div class="calendar-header">
+            <span class="calendar-title">📅 Ventas por día</span>
+            <span class="calendar-total">Semana: <strong id="calWeekTotal">0</strong></span>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
         </div>
       </div>
     </div>
@@ -662,6 +837,14 @@
         <label for="newProductThreshold">Alerta de stock bajo (unidades)</label>
         <input type="number" id="newProductThreshold" inputmode="numeric" min="0" step="1" value="3" placeholder="Ej: 3">
       </div>
+      <div class="modal-field">
+        <label>Metas de venta (opcional, en unidades)</label>
+        <div class="modal-row-2">
+          <input type="number" id="newProductWeeklyGoal" inputmode="numeric" min="0" step="1" value="0" placeholder="Semanal">
+          <input type="number" id="newProductMonthlyGoal" inputmode="numeric" min="0" step="1" value="0" placeholder="Mensual">
+        </div>
+        <div style="font-size:0.62rem; color:#a58c6d; margin-top:0.3rem;">Déjalo en 0 si no quieres meta por ahora.</div>
+      </div>
 
       <div class="modal-actions">
         <button class="btn-cancel" id="btnCancelNewProduct">Cancelar</button>
@@ -696,6 +879,16 @@
     const db = getDatabase(app);
 
     const DEFAULT_ICONS = ['🧻', '📄', '🥤', '🍪', '🥛', '🥚', '🍎', '🐟', '🧴', '🧼', '🍞', '📦', '🎀', '📎', '🩹', '🍬'];
+    const DAYS = [
+      { key: 'mon', label: 'L', full: 'Lunes' },
+      { key: 'tue', label: 'M', full: 'Martes' },
+      { key: 'wed', label: 'X', full: 'Miércoles' },
+      { key: 'thu', label: 'J', full: 'Jueves' },
+      { key: 'fri', label: 'V', full: 'Viernes' },
+      { key: 'sat', label: 'S', full: 'Sábado' },
+      { key: 'sun', label: 'D', full: 'Domingo' }
+    ];
+
     let PRODUCTS = {};
     let dbRef = null;
     let unsubDb = null;
@@ -704,6 +897,68 @@
 
     function uid() {
       return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+    }
+
+    function getTodayKey() {
+      const d = new Date();
+      const map = ['sun','mon','tue','wed','thu','fri','sat'];
+      return map[d.getDay()];
+    }
+
+    function getMondayOfCurrentWeek() {
+      const now = new Date();
+      const day = now.getDay();
+      const diff = (day === 0 ? -6 : 1 - day);
+      const monday = new Date(now);
+      monday.setDate(now.getDate() + diff);
+      monday.setHours(0, 0, 0, 0);
+      return monday;
+    }
+
+    function getFirstOfCurrentMonth() {
+      const now = new Date();
+      const first = new Date(now.getFullYear(), now.getMonth(), 1);
+      first.setHours(0, 0, 0, 0);
+      return first;
+    }
+
+    function isInCurrentWeek(timestamp) {
+      const monday = getMondayOfCurrentWeek();
+      const nextMonday = new Date(monday);
+      nextMonday.setDate(monday.getDate() + 7);
+      return timestamp >= monday.getTime() && timestamp < nextMonday.getTime();
+    }
+
+    function isInCurrentMonth(timestamp) {
+      const first = getFirstOfCurrentMonth();
+      const nextMonth = new Date(first);
+      nextMonth.setMonth(first.getMonth() + 1);
+      return timestamp >= first.getTime() && timestamp < nextMonth.getTime();
+    }
+
+    function buildCalendarData(salesLog) {
+      const calendar = {};
+      DAYS.forEach(d => {
+        calendar[d.key] = { total: 0, products: {} };
+      });
+      salesLog.forEach(sale => {
+        if (!sale || !sale.timestamp) return;
+        const date = new Date(sale.timestamp);
+        const map = ['sun','mon','tue','wed','thu','fri','sat'];
+        const dayKey = map[date.getDay()];
+        if (!calendar[dayKey]) return;
+        calendar[dayKey].total += 1;
+        const pid = sale.productId;
+        if (!calendar[dayKey].products[pid]) {
+          calendar[dayKey].products[pid] = {
+            name: sale.productName || 'Producto',
+            icon: sale.productIcon || '📦',
+            count: 0,
+          };
+        }
+        calendar[dayKey].products[pid].count += 1;
+      });
+      return calendar;
     }
 
     function createFreshState() {
@@ -716,10 +971,13 @@
           salePrice: 3000,
           customIcon: '🧻',
           lowStockThreshold: 3,
+          weeklyGoal: 0,
+          monthlyGoal: 0,
           entries: [],
           soldCount: 0,
           totalSales: 0,
           totalCost: 0,
+          salesLog: [],
         }
       };
     }
@@ -740,14 +998,15 @@
     function showToast(msg, type) {
       const toast = document.getElementById('toast');
       toast.textContent = msg;
-      toast.classList.remove('alert', 'danger');
+      toast.classList.remove('alert', 'danger', 'success');
       if (type === 'alert') toast.classList.add('alert');
       else if (type === 'danger') toast.classList.add('danger');
+      else if (type === 'success') toast.classList.add('success');
       toast.classList.add('show');
       clearTimeout(showToast._t);
       showToast._t = setTimeout(() => {
         toast.classList.remove('show');
-        toast.classList.remove('alert', 'danger');
+        toast.classList.remove('alert', 'danger', 'success');
       }, type ? 2600 : 1900);
     }
 
@@ -823,6 +1082,26 @@
       return { income, expense, balance: income - expense };
     }
 
+    // ============================================
+    // METAS POR UNIDADES
+    // ============================================
+    function getProductWeeklyUnits(product) {
+      if (!Array.isArray(product.salesLog)) return 0;
+      let count = 0;
+      product.salesLog.forEach(s => {
+        if (s && s.timestamp && isInCurrentWeek(s.timestamp)) count++;
+      });
+      return count;
+    }
+    function getProductMonthlyUnits(product) {
+      if (!Array.isArray(product.salesLog)) return 0;
+      let count = 0;
+      product.salesLog.forEach(s => {
+        if (s && s.timestamp && isInCurrentMonth(s.timestamp)) count++;
+      });
+      return count;
+    }
+
     function sanitizeProducts(raw) {
       if (!raw || typeof raw !== 'object') return {};
       const clean = {};
@@ -836,6 +1115,8 @@
           salePrice: typeof p.salePrice === 'number' && p.salePrice > 0 ? p.salePrice : 1000,
           customIcon: p.customIcon || '📦',
           lowStockThreshold: typeof p.lowStockThreshold === 'number' && p.lowStockThreshold >= 0 ? p.lowStockThreshold : 3,
+          weeklyGoal: typeof p.weeklyGoal === 'number' && p.weeklyGoal >= 0 ? p.weeklyGoal : 0,
+          monthlyGoal: typeof p.monthlyGoal === 'number' && p.monthlyGoal >= 0 ? p.monthlyGoal : 0,
           entries: Array.isArray(p.entries) ? p.entries.filter(e => e && typeof e.qty === 'number' && e.qty > 0 && typeof e.unitCost === 'number').map(e => ({
             id: e.id || uid(),
             unitCost: e.unitCost,
@@ -845,6 +1126,13 @@
           soldCount: typeof p.soldCount === 'number' && p.soldCount >= 0 ? p.soldCount : 0,
           totalSales: typeof p.totalSales === 'number' ? p.totalSales : 0,
           totalCost: typeof p.totalCost === 'number' ? p.totalCost : 0,
+          salesLog: Array.isArray(p.salesLog) ? p.salesLog.filter(s => s && s.timestamp).map(s => ({
+            productId: s.productId || k,
+            productName: s.productName || p.name || 'Producto',
+            productIcon: s.productIcon || p.customIcon || '📦',
+            salePrice: typeof s.salePrice === 'number' ? s.salePrice : (p.salePrice || 0),
+            timestamp: s.timestamp,
+          })) : [],
         };
         const totalEntered = prod.entries.reduce((a, e) => a + e.qty, 0);
         if (prod.soldCount > totalEntered) prod.soldCount = totalEntered;
@@ -867,16 +1155,15 @@
 
       if (status === 'offline' && errorMsg) {
         diag.classList.add('visible');
-        // Traducir mensajes comunes de Firebase a algo entendible
         let friendly = errorMsg;
         if (errorMsg.includes('permission_denied') || errorMsg.includes('permission-denied')) {
-          friendly = 'Firebase rechazó la lectura. Verifica que las <strong>reglas de Realtime Database</strong> sean <code>{".read": "auth != null", ".write": "auth != null"}</code> y estén publicadas.';
+          friendly = 'Firebase rechazó la lectura. Verifica las <strong>reglas de Realtime Database</strong>.';
         } else if (errorMsg.includes('unauthorized-domain')) {
-          friendly = 'Este dominio no está autorizado en Firebase Auth. Agrégalo en <strong>Authentication → Settings → Authorized domains</strong>.';
+          friendly = 'Este dominio no está autorizado en Firebase Auth.';
         } else if (errorMsg.includes('Failed to fetch') || errorMsg.includes('network')) {
-          friendly = 'Sin conexión a internet o la URL de la base de datos no responde. Verifica tu conexión.';
+          friendly = 'Sin conexión a internet o la URL no responde.';
         } else if (errorMsg.includes('404') || errorMsg.includes('not found')) {
-          friendly = 'La base de datos no existe. Créala en <strong>Realtime Database</strong> en la consola de Firebase.';
+          friendly = 'La base de datos no existe.';
         }
         diagMsg.innerHTML = friendly;
       } else if (status === 'online') {
@@ -900,11 +1187,9 @@
       if (dbRef) off(dbRef);
       dbRef = ref(db, 'products');
 
-      // Primero hacemos una lectura única para saber si la base está vacía
       get(dbRef).then((snapshot) => {
         const data = snapshot.val();
         if (!data || Object.keys(data).length === 0) {
-          // Base vacía: subir el estado local por primera vez
           console.log('Base vacía, subiendo estado inicial...');
           pushToFirebase();
         }
@@ -913,17 +1198,10 @@
         updateSyncStatus('offline', e.message || String(e));
       });
 
-      // Luego suscripción en vivo
       unsubDb = onValue(dbRef, (snapshot) => {
         const data = snapshot.val();
         if (data && Object.keys(data).length > 0) {
           PRODUCTS = sanitizeProducts(data);
-        } else {
-          // Si Firebase está vacío pero tenemos datos locales con contenido,
-          // los empujamos para no perder trabajo previo
-          if (Object.keys(PRODUCTS).length === 0 || initialFirebaseLoadDone) {
-            // Nada que hacer
-          }
         }
         initialFirebaseLoadDone = true;
         updateSyncStatus('online');
@@ -973,11 +1251,21 @@
       else if (status === 'out') card.classList.add('status-out');
 
       let alertBadge = '';
-      if (status === 'low') {
-        alertBadge = `<span class="stock-alert-badge">⚠️ Reponer</span>`;
-      } else if (status === 'out') {
-        alertBadge = `<span class="stock-alert-badge out">🚫 Sin stock</span>`;
-      }
+      if (status === 'low') alertBadge = `<span class="stock-alert-badge">⚠️ Reponer</span>`;
+      else if (status === 'out') alertBadge = `<span class="stock-alert-badge out">🚫 Sin stock</span>`;
+
+      // Metas en UNIDADES
+      const weeklyUnits = getProductWeeklyUnits(product);
+      const monthlyUnits = getProductMonthlyUnits(product);
+      const weeklyGoal = product.weeklyGoal || 0;
+      const monthlyGoal = product.monthlyGoal || 0;
+      const weeklyPct = weeklyGoal > 0 ? Math.min(100, (weeklyUnits / weeklyGoal) * 100) : 0;
+      const monthlyPct = monthlyGoal > 0 ? Math.min(100, (monthlyUnits / monthlyGoal) * 100) : 0;
+      const weeklyComplete = weeklyGoal > 0 && weeklyUnits >= weeklyGoal;
+      const monthlyComplete = monthlyGoal > 0 && monthlyUnits >= monthlyGoal;
+
+      const weeklyLabel = weeklyGoal > 0 ? `${weeklyUnits}u / ${weeklyGoal}u` : 'sin meta';
+      const monthlyLabel = monthlyGoal > 0 ? `${monthlyUnits}u / ${monthlyGoal}u` : 'sin meta';
 
       card.innerHTML = `
         <div class="product-row" data-toggle="${product.id}">
@@ -995,6 +1283,27 @@
               </span>
               ${alertBadge}
             </div>
+          </div>
+        </div>
+
+        <div class="goals-mini">
+          <div class="goal-mini-row">
+            <span class="goal-mini-label">SEM</span>
+            <div class="goal-mini-track">
+              <div class="goal-mini-fill weekly ${weeklyComplete ? 'complete' : ''}" style="width:${weeklyPct}%"></div>
+            </div>
+            <span class="goal-mini-value ${weeklyComplete ? 'complete' : ''} ${weeklyGoal === 0 ? 'no-goal' : ''}">
+              ${weeklyLabel}
+            </span>
+          </div>
+          <div class="goal-mini-row">
+            <span class="goal-mini-label">MES</span>
+            <div class="goal-mini-track">
+              <div class="goal-mini-fill monthly ${monthlyComplete ? 'complete' : ''}" style="width:${monthlyPct}%"></div>
+            </div>
+            <span class="goal-mini-value ${monthlyComplete ? 'complete' : ''} ${monthlyGoal === 0 ? 'no-goal' : ''}">
+              ${monthlyLabel}
+            </span>
           </div>
         </div>
 
@@ -1020,14 +1329,33 @@
             <div class="pstat profit"><span class="lbl">Ganancia</span><span class="val" id="profit-${product.id}">${formatCLPAbs(getProductProfit(product))}</span></div>
           </div>
 
-          <div class="product-alert-config">
-            <div class="cfg-label">
-              <span class="icon">⚠️</span>
-              <span>Alerta stock bajo</span>
+          <div class="product-config-grid">
+            <div class="product-config-row">
+              <div class="cfg-label">
+                <span class="icon">⚠️</span><span>Alerta stock bajo</span>
+              </div>
+              <div class="cfg-input-wrap">
+                <input type="number" data-threshold-input="${product.id}" min="0" step="1" value="${product.lowStockThreshold}">
+                <span class="cfg-unit">unid.</span>
+              </div>
             </div>
-            <div class="cfg-input-wrap">
-              <input type="number" data-threshold-input="${product.id}" min="0" step="1" value="${product.lowStockThreshold}">
-              <span class="cfg-unit">unid.</span>
+            <div class="product-config-row">
+              <div class="cfg-label">
+                <span class="icon">🎯</span><span>Meta semanal</span>
+              </div>
+              <div class="cfg-input-wrap">
+                <input type="number" data-weekly-goal-input="${product.id}" min="0" step="1" value="${weeklyGoal}">
+                <span class="cfg-unit">unid.</span>
+              </div>
+            </div>
+            <div class="product-config-row">
+              <div class="cfg-label">
+                <span class="icon">🏆</span><span>Meta mensual</span>
+              </div>
+              <div class="cfg-input-wrap">
+                <input type="number" data-monthly-goal-input="${product.id}" min="0" step="1" value="${monthlyGoal}">
+                <span class="cfg-unit">unid.</span>
+              </div>
             </div>
           </div>
 
@@ -1052,6 +1380,7 @@
       renderProductsList();
       renderGlobal();
       renderAlertBadge();
+      renderCalendar();
       attachEvents();
     }
 
@@ -1099,6 +1428,43 @@
       } else {
         badge.classList.remove('visible');
       }
+    }
+
+    function renderCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      if (!grid) return;
+
+      const allSales = [];
+      Object.values(PRODUCTS).forEach(p => {
+        if (Array.isArray(p.salesLog)) {
+          p.salesLog.forEach(s => allSales.push(s));
+        }
+      });
+
+      const thisWeekSales = allSales.filter(s => isInCurrentWeek(s.timestamp));
+      const calendarData = buildCalendarData(thisWeekSales);
+      const todayKey = getTodayKey();
+
+      let weekTotal = 0;
+      DAYS.forEach(d => { weekTotal += calendarData[d.key].total; });
+      document.getElementById('calWeekTotal').textContent = weekTotal;
+
+      grid.innerHTML = DAYS.map(d => {
+        const dayData = calendarData[d.key];
+        const isToday = d.key === todayKey;
+        const totalClass = dayData.total === 0 ? 'empty' : '';
+        const prods = Object.values(dayData.products).sort((a, b) => b.count - a.count);
+        const prodLines = prods.map(p => {
+          return `<span class="prod-count" title="${escapeHTML(p.name)}">${p.count}</span>`;
+        }).join('');
+        return `
+          <div class="calendar-day ${isToday ? 'today' : ''}">
+            <span class="day-label">${d.label}</span>
+            <span class="day-total ${totalClass}">${dayData.total}</span>
+            <div class="day-products">${prodLines}</div>
+          </div>
+        `;
+      }).join('');
     }
 
     function attachEvents() {
@@ -1157,12 +1523,40 @@
         };
         inp.addEventListener('change', applyValue);
         inp.addEventListener('blur', applyValue);
-        inp.addEventListener('input', () => {
+      });
+
+      document.querySelectorAll('[data-weekly-goal-input]').forEach(inp => {
+        const productId = inp.getAttribute('data-weekly-goal-input');
+        const applyValue = () => {
+          const product = PRODUCTS[productId];
+          if (!product) return;
           let val = parseInt(inp.value, 10);
-          if (!isNaN(val) && val >= 0 && val <= 999) {
-            PRODUCTS[productId].lowStockThreshold = val;
-          }
-        });
+          if (isNaN(val) || val < 0) val = 0;
+          product.weeklyGoal = val;
+          inp.value = val;
+          saveState();
+          renderProductsList();
+          attachEvents();
+        };
+        inp.addEventListener('change', applyValue);
+        inp.addEventListener('blur', applyValue);
+      });
+
+      document.querySelectorAll('[data-monthly-goal-input]').forEach(inp => {
+        const productId = inp.getAttribute('data-monthly-goal-input');
+        const applyValue = () => {
+          const product = PRODUCTS[productId];
+          if (!product) return;
+          let val = parseInt(inp.value, 10);
+          if (isNaN(val) || val < 0) val = 0;
+          product.monthlyGoal = val;
+          inp.value = val;
+          saveState();
+          renderProductsList();
+          attachEvents();
+        };
+        inp.addEventListener('change', applyValue);
+        inp.addEventListener('blur', applyValue);
       });
     }
 
@@ -1183,9 +1577,20 @@
       if (costOfNext === null) { showToast('Error al calcular costo.', 'danger'); return; }
 
       const statusBefore = getStockStatus(product);
+
+      if (!Array.isArray(product.salesLog)) product.salesLog = [];
+      product.salesLog.push({
+        productId: product.id,
+        productName: product.name,
+        productIcon: product.customIcon || '📦',
+        salePrice: product.salePrice,
+        timestamp: Date.now(),
+      });
+
       product.totalSales += product.salePrice;
       product.totalCost += costOfNext;
       product.soldCount += 1;
+
       saveState();
       renderAll();
 
@@ -1202,6 +1607,7 @@
     function removeOneSale(productId) {
       const product = PRODUCTS[productId];
       if (product.soldCount <= 0) { showToast('No hay ventas para quitar.'); return; }
+
       let runningIdx = 0, costToRefund = null;
       for (const entry of product.entries) {
         for (let i = 0; i < entry.qty; i++) {
@@ -1211,6 +1617,15 @@
         if (costToRefund !== null) break;
       }
       if (costToRefund === null) { showToast('Error al revertir.', 'danger'); return; }
+
+      if (Array.isArray(product.salesLog) && product.salesLog.length > 0) {
+        for (let i = product.salesLog.length - 1; i >= 0; i--) {
+          if (product.salesLog[i].productId === productId) {
+            product.salesLog.splice(i, 1);
+            break;
+          }
+        }
+      }
 
       product.totalSales -= product.salePrice;
       product.totalCost -= costToRefund;
@@ -1283,13 +1698,17 @@
       showToast('Producto eliminado');
     }
 
-    function createProduct({ name, icon, salePrice, unitLabel, lowStockThreshold }) {
+    function createProduct({ name, icon, salePrice, unitLabel, lowStockThreshold, weeklyGoal, monthlyGoal }) {
       if (!name || !name.trim()) { showToast('Falta el nombre.'); return null; }
       if (!salePrice || salePrice <= 0) { showToast('Falta el precio de venta.'); return null; }
       const id = 'p_' + uid();
       const unit = (unitLabel || 'unidad').trim();
       let threshold = parseInt(lowStockThreshold, 10);
       if (isNaN(threshold) || threshold < 0) threshold = 3;
+      let wGoal = parseInt(weeklyGoal, 10);
+      if (isNaN(wGoal) || wGoal < 0) wGoal = 0;
+      let mGoal = parseInt(monthlyGoal, 10);
+      if (isNaN(mGoal) || mGoal < 0) mGoal = 0;
 
       PRODUCTS[id] = {
         id,
@@ -1299,10 +1718,13 @@
         salePrice: parseInt(salePrice, 10),
         customIcon: icon || '📦',
         lowStockThreshold: threshold,
+        weeklyGoal: wGoal,
+        monthlyGoal: mGoal,
         entries: [],
         soldCount: 0,
         totalSales: 0,
         totalCost: 0,
+        salesLog: [],
       };
       saveState();
       renderAll();
@@ -1394,10 +1816,6 @@
     const entriesModal = document.getElementById('entriesModal');
     const entriesList = document.getElementById('entriesList');
 
-    function openEntries(productId) {
-      renderEntriesList(productId);
-      entriesModal.classList.add('open');
-    }
     function renderEntriesList(productId) {
       const product = PRODUCTS[productId];
       if (product.entries.length === 0) {
@@ -1522,6 +1940,8 @@
     const newProductPrice = document.getElementById('newProductPrice');
     const newProductUnit = document.getElementById('newProductUnit');
     const newProductThreshold = document.getElementById('newProductThreshold');
+    const newProductWeeklyGoal = document.getElementById('newProductWeeklyGoal');
+    const newProductMonthlyGoal = document.getElementById('newProductMonthlyGoal');
     const newProductIconPicker = document.getElementById('newProductIconPicker');
     let newProductIcon = '📦';
 
@@ -1530,6 +1950,8 @@
       newProductPrice.value = '';
       newProductUnit.value = 'unidad';
       newProductThreshold.value = '3';
+      newProductWeeklyGoal.value = '0';
+      newProductMonthlyGoal.value = '0';
       newProductIcon = '📦';
       renderNewProductIconPicker();
       newProductModal.classList.add('open');
@@ -1555,12 +1977,20 @@
         salePrice: parseInt(newProductPrice.value, 10),
         unitLabel: newProductUnit.value || 'unidad',
         lowStockThreshold: newProductThreshold.value,
+        weeklyGoal: newProductWeeklyGoal.value,
+        monthlyGoal: newProductMonthlyGoal.value,
       });
       if (id) newProductModal.classList.remove('open');
     });
     newProductModal.addEventListener('click', (e) => { if (e.target === newProductModal) newProductModal.classList.remove('open'); });
 
     document.getElementById('addProductCard').addEventListener('click', openNewProductModal);
+
+    const summaryCard = document.getElementById('summaryCard');
+    const summaryHeader = document.getElementById('summaryHeader');
+    summaryHeader.addEventListener('click', () => {
+      summaryCard.classList.toggle('open');
+    });
 
     const loginScreen = document.getElementById('loginScreen');
     const loginEmail = document.getElementById('loginEmail');
@@ -1577,10 +2007,7 @@
     loginBtn.addEventListener('click', async () => {
       const email = loginEmail.value.trim();
       const password = loginPassword.value;
-      if (!email || !password) {
-        showLoginError('Completa ambos campos.');
-        return;
-      }
+      if (!email || !password) { showLoginError('Completa ambos campos.'); return; }
       loginBtn.disabled = true;
       loginBtn.textContent = 'Ingresando…';
       try {
