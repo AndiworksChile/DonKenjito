@@ -158,7 +158,6 @@
     .sync-dot.syncing { background: #ff8c42; animation: pulseDot 1s ease-in-out infinite; }
     @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    /* ETIQUETA DE USUARIO */
     .user-label {
       font-size: 0.72rem;
       font-weight: 700;
@@ -581,6 +580,9 @@
     .btn-confirm { background: #7b6bc4; color: white; }
     .btn-danger { background: #c0392b; color: white; }
 
+    /* ============================================
+       HISTORIAL: tabla con columna Día de venta editable
+       ============================================ */
     .history-table-wrap { max-height: 45vh; overflow-y: auto; border-radius: 10px; border: 1px solid #f0dfcd; background: white; margin-bottom: 0.7rem; }
     .history-table { width: 100%; border-collapse: collapse; font-size: 0.72rem; }
     .history-table th {
@@ -596,6 +598,81 @@
     .history-table tr.unsold td.status { font-weight: 700; color: #3d2b1a; }
     .history-table td.num { font-weight: 700; color: #7a4d1f; }
     .history-table tr.sold td.num { color: #2e7d4f; }
+
+    /* Celda editable del día de venta */
+    .day-cell {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: #fff6ec;
+      border: 1.5px solid #e0c9a8;
+      font-weight: 800;
+      font-size: 0.72rem;
+      color: #7a4d1f;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s ease;
+      letter-spacing: 0.3px;
+    }
+    .day-cell:active {
+      background: #ffe8cc;
+      transform: scale(0.96);
+    }
+    .day-cell.today {
+      background: #fff2df;
+      border-color: #c99b6a;
+    }
+    .day-cell.sold {
+      background: #e8f5ec;
+      border-color: #7ec79a;
+      color: #2e7d4f;
+    }
+    .day-cell.empty {
+      background: #fbe4e0;
+      border-color: #f0b0a6;
+      color: #c0392b;
+      font-size: 0.6rem;
+      padding: 3px 6px;
+    }
+    .day-cell.editable {
+      cursor: pointer;
+    }
+
+    /* Selector de días del modal */
+    .day-picker {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.35rem;
+      margin: 0.5rem 0 0.9rem;
+    }
+    .day-option {
+      aspect-ratio: 1;
+      border-radius: 10px;
+      background: #fff6ec;
+      border: 2px solid #f0dfcd;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #a5723e;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s ease;
+      letter-spacing: 0.3px;
+    }
+    .day-option:hover { border-color: #d99a5b; }
+    .day-option.selected {
+      border-color: #7b6bc4;
+      background: #f0ecfa;
+      color: #5a4aa8;
+      box-shadow: 0 0 0 3px rgba(123, 107, 196, 0.15);
+    }
+    .day-option.today-option {
+      border-color: #c99b6a;
+      background: #fff2df;
+    }
 
     .history-summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem; margin-bottom: 0.7rem; font-size: 0.68rem; }
     .history-summary .hs-item { background: #fff6ec; border-radius: 8px; padding: 0.35rem 0.4rem; text-align: center; border: 1px solid #f0dfcd; }
@@ -794,7 +871,7 @@
   <div class="modal-overlay" id="historyModal">
     <div class="modal">
       <h3 id="historyTitle">📋 Historial de ventas</h3>
-      <p id="historyDesc">Detalle de cada unidad (FIFO). Los vendidos aparecen en verde.</p>
+      <p id="historyDesc">Toca el <strong>día</strong> de una venta para cambiarlo. El calendario se actualiza al instante.</p>
       <div class="history-summary">
         <div class="hs-item"><span class="lbl">Vendidos</span><span class="val" id="hsSold">0</span></div>
         <div class="hs-item"><span class="lbl">En stock</span><span class="val" id="hsStock">0</span></div>
@@ -802,12 +879,33 @@
       </div>
       <div class="history-table-wrap">
         <table class="history-table">
-          <thead><tr><th>#</th><th>Costo</th><th>Venta</th><th>Ganancia</th><th>Estado</th></tr></thead>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Costo</th>
+              <th>Venta</th>
+              <th>Ganancia</th>
+              <th>Día</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
           <tbody id="historyTableBody"></tbody>
         </table>
       </div>
       <div class="modal-actions">
         <button class="btn-cancel" id="btnCloseHistory">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SELECTOR DE DÍA -->
+  <div class="modal-overlay" id="dayPickerModal">
+    <div class="modal">
+      <h3>📅 Cambiar día de venta</h3>
+      <p id="dayPickerDesc">Selecciona el día de la semana en que se realizó esta venta.</p>
+      <div class="day-picker" id="dayPickerGrid"></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="btnCancelDayPicker">Cancelar</button>
       </div>
     </div>
   </div>
@@ -896,14 +994,10 @@
       appId: "1:1027779550071:web:9db1e24e5c8a4f6cd09f72"
     };
 
-    // ============================================
-    // MAPA DE USUARIOS: UID → Nombre para mostrar
-    // ============================================
     const USER_NAMES = {
       'pylhJVFXiGQiWal2QS5qWcDstk12': 'Andrés',
       '919RE70NIDgj34TaBmtlsnLnfCG2': 'Amorcita',
     };
-
     function getUserDisplayName(uid) {
       return USER_NAMES[uid] || null;
     }
@@ -922,6 +1016,7 @@
       { key: 'sat', label: 'S', full: 'Sábado' },
       { key: 'sun', label: 'D', full: 'Domingo' }
     ];
+    const DAY_KEY_TO_INDEX = { sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6 };
 
     let PRODUCTS = {};
     let dbRef = null;
@@ -939,8 +1034,11 @@
       return map[d.getDay()];
     }
 
-    function getMondayOfCurrentWeek() {
-      const now = new Date();
+    // ============================================
+    // LUNES A LAS 00:00 DE LA SEMANA ACTUAL
+    // ============================================
+    function getMondayOfCurrentWeek(referenceDate) {
+      const now = referenceDate ? new Date(referenceDate) : new Date();
       const day = now.getDay();
       const diff = (day === 0 ? -6 : 1 - day);
       const monday = new Date(now);
@@ -949,14 +1047,15 @@
       return monday;
     }
 
-    function getFirstOfCurrentMonth() {
-      const now = new Date();
+    function getFirstOfCurrentMonth(referenceDate) {
+      const now = referenceDate ? new Date(referenceDate) : new Date();
       const first = new Date(now.getFullYear(), now.getMonth(), 1);
       first.setHours(0, 0, 0, 0);
       return first;
     }
 
     function isInCurrentWeek(timestamp) {
+      if (!timestamp) return false;
       const monday = getMondayOfCurrentWeek();
       const nextMonday = new Date(monday);
       nextMonday.setDate(monday.getDate() + 7);
@@ -964,19 +1063,25 @@
     }
 
     function isInCurrentMonth(timestamp) {
+      if (!timestamp) return false;
       const first = getFirstOfCurrentMonth();
       const nextMonth = new Date(first);
       nextMonth.setMonth(first.getMonth() + 1);
       return timestamp >= first.getTime() && timestamp < nextMonth.getTime();
     }
 
+    // ============================================
+    // CONSTRUIR CALENDARIO A PARTIR DE salesLog
+    // Si una venta no tiene timestamp, se cuenta como "sin día".
+    // ============================================
     function buildCalendarData(salesLog) {
       const calendar = {};
       DAYS.forEach(d => {
         calendar[d.key] = { total: 0, products: {} };
       });
+      let noDayCount = 0;
       salesLog.forEach(sale => {
-        if (!sale || !sale.timestamp) return;
+        if (!sale || !sale.timestamp) { noDayCount++; return; }
         const date = new Date(sale.timestamp);
         const map = ['sun','mon','tue','wed','thu','fri','sat'];
         const dayKey = map[date.getDay()];
@@ -992,7 +1097,7 @@
         }
         calendar[dayKey].products[pid].count += 1;
       });
-      return calendar;
+      return { calendar, noDayCount };
     }
 
     function createFreshState() {
@@ -1080,6 +1185,15 @@
         return s === 'low' || s === 'out';
       }).length;
     }
+
+    // ============================================
+    // UNIDADES FIFO CON TIMESTAMP ASOCIADO
+    // --------------------------------------------
+    // Cada venta en salesLog corresponde 1:1 a una unidad vendida.
+    // El orden de salesLog es cronológico (se agrega al vender).
+    // Al construir las unidades FIFO, asociamos cada unidad vendida
+    // (en el mismo orden) con la venta correspondiente del salesLog.
+    // ============================================
     function getUnitsFIFO(product) {
       const units = [];
       let idx = 0;
@@ -1089,12 +1203,23 @@
             unitCost: entry.unitCost,
             entryId: entry.id,
             sold: idx < product.soldCount,
+            saleIndex: idx < product.soldCount ? idx : -1,
           });
           idx++;
         }
       }
+      // Asociar cada unidad vendida con su venta del salesLog (mismo índice)
+      const salesLog = Array.isArray(product.salesLog) ? product.salesLog : [];
+      units.forEach(u => {
+        if (u.sold && u.saleIndex >= 0 && u.saleIndex < salesLog.length) {
+          u.sale = salesLog[u.saleIndex];
+        } else {
+          u.sale = null;
+        }
+      });
       return units;
     }
+
     function getSoldPerEntry(product) {
       const soldPerEntry = {};
       product.entries.forEach(e => { soldPerEntry[e.id] = 0; });
@@ -1157,16 +1282,33 @@
           soldCount: typeof p.soldCount === 'number' && p.soldCount >= 0 ? p.soldCount : 0,
           totalSales: typeof p.totalSales === 'number' ? p.totalSales : 0,
           totalCost: typeof p.totalCost === 'number' ? p.totalCost : 0,
-          salesLog: Array.isArray(p.salesLog) ? p.salesLog.filter(s => s && s.timestamp).map(s => ({
+          salesLog: Array.isArray(p.salesLog) ? p.salesLog.map(s => ({
             productId: s.productId || k,
             productName: s.productName || p.name || 'Producto',
             productIcon: s.productIcon || p.customIcon || '📦',
             salePrice: typeof s.salePrice === 'number' ? s.salePrice : (p.salePrice || 0),
-            timestamp: s.timestamp,
+            timestamp: typeof s.timestamp === 'number' && s.timestamp > 0 ? s.timestamp : null,
           })) : [],
         };
         const totalEntered = prod.entries.reduce((a, e) => a + e.qty, 0);
         if (prod.soldCount > totalEntered) prod.soldCount = totalEntered;
+
+        // Reconciliación: si soldCount > salesLog.length, agregar ventas
+        // huérfanas con timestamp null para no perder información.
+        while (prod.salesLog.length < prod.soldCount) {
+          prod.salesLog.push({
+            productId: prod.id,
+            productName: prod.name,
+            productIcon: prod.customIcon,
+            salePrice: prod.salePrice,
+            timestamp: null,
+          });
+        }
+        // Si salesLog tiene más de soldCount, recortar
+        if (prod.salesLog.length > prod.soldCount) {
+          prod.salesLog = prod.salesLog.slice(0, prod.soldCount);
+        }
+
         clean[k] = prod;
       });
       return clean;
@@ -1464,6 +1606,7 @@
       const grid = document.getElementById('calendarGrid');
       if (!grid) return;
 
+      // Recolectar ventas de esta semana
       const allSales = [];
       Object.values(PRODUCTS).forEach(p => {
         if (Array.isArray(p.salesLog)) {
@@ -1471,8 +1614,10 @@
         }
       });
 
+      // Incluir también las ventas sin fecha (huérfanas) para contabilizarlas
+      // como "sin día". Se muestran en un pequeño aviso bajo el calendario.
       const thisWeekSales = allSales.filter(s => isInCurrentWeek(s.timestamp));
-      const calendarData = buildCalendarData(thisWeekSales);
+      const { calendar: calendarData, noDayCount } = buildCalendarData(thisWeekSales);
       const todayKey = getTodayKey();
 
       let weekTotal = 0;
@@ -1608,6 +1753,7 @@
 
       const statusBefore = getStockStatus(product);
 
+      // Registrar la venta con timestamp actual
       if (!Array.isArray(product.salesLog)) product.salesLog = [];
       product.salesLog.push({
         productId: product.id,
@@ -1648,13 +1794,9 @@
       }
       if (costToRefund === null) { showToast('Error al revertir.', 'danger'); return; }
 
+      // Quitar la última entrada del salesLog
       if (Array.isArray(product.salesLog) && product.salesLog.length > 0) {
-        for (let i = product.salesLog.length - 1; i >= 0; i--) {
-          if (product.salesLog[i].productId === productId) {
-            product.salesLog.splice(i, 1);
-            break;
-          }
-        }
+        product.salesLog.pop();
       }
 
       product.totalSales -= product.salePrice;
@@ -1810,39 +1952,181 @@
     });
     stockModal.addEventListener('click', (e) => { if (e.target === stockModal) closeStockModal(); });
 
+    // ============================================
+    // MODAL HISTORIAL
+    // ============================================
     const historyModal = document.getElementById('historyModal');
     const historyTitle = document.getElementById('historyTitle');
     const historyTableBody = document.getElementById('historyTableBody');
     const hsSold = document.getElementById('hsSold');
     const hsStock = document.getElementById('hsStock');
     const hsProfit = document.getElementById('hsProfit');
+    let historyCurrentProductId = null;
+
+    function dayKeyFromTimestamp(ts) {
+      if (!ts) return null;
+      const d = new Date(ts);
+      const map = ['sun','mon','tue','wed','thu','fri','sat'];
+      return map[d.getDay()];
+    }
+    function dayLabelFromKey(key) {
+      const found = DAYS.find(d => d.key === key);
+      return found ? found.label : '?';
+    }
 
     function openHistory(productId) {
+      historyCurrentProductId = productId;
+      renderHistoryTable(productId);
+      historyModal.classList.add('open');
+    }
+
+    function renderHistoryTable(productId) {
       const product = PRODUCTS[productId];
+      if (!product) return;
       historyTitle.textContent = `📋 Historial · ${product.name}`;
+
       const units = getUnitsFIFO(product);
       const rows = units.map((u, idx) => {
         const profit = product.salePrice - u.unitCost;
         const estado = u.sold ? 'Vendido' : 'En stock';
+        let dayHTML = '';
+        if (u.sold) {
+          const key = u.sale ? dayKeyFromTimestamp(u.sale.timestamp) : null;
+          if (key) {
+            const todayKey = getTodayKey();
+            const todayClass = key === todayKey ? 'today' : '';
+            dayHTML = `<button class="day-cell sold ${todayClass} editable" data-day-edit="${idx}" data-product="${productId}" title="Toca para cambiar el día">${dayLabelFromKey(key)}</button>`;
+          } else {
+            dayHTML = `<button class="day-cell empty editable" data-day-edit="${idx}" data-product="${productId}" title="Sin día asignado. Toca para asignar.">s/d</button>`;
+          }
+        } else {
+          dayHTML = `<span class="day-cell">—</span>`;
+        }
         return `
           <tr class="${u.sold ? 'sold' : 'unsold'}">
             <td class="num">${idx + 1}</td>
             <td>${formatCLPAbs(u.unitCost)}</td>
             <td>${formatCLPAbs(product.salePrice)}</td>
             <td>${formatCLPAbs(profit)}</td>
+            <td>${dayHTML}</td>
             <td class="status">${estado}</td>
           </tr>
         `;
       }).join('');
-      historyTableBody.innerHTML = rows || '<tr><td colspan="5" style="text-align:center;color:#a58c6d;padding:1rem;">Sin unidades registradas</td></tr>';
+
+      historyTableBody.innerHTML = rows || '<tr><td colspan="6" style="text-align:center;color:#a58c6d;padding:1rem;">Sin unidades registradas</td></tr>';
+
       hsSold.textContent = product.soldCount;
       hsStock.textContent = units.length - product.soldCount;
       hsProfit.textContent = formatCLPAbs(getProductProfit(product));
-      historyModal.classList.add('open');
+
+      // Listeners para los botones de día
+      historyTableBody.querySelectorAll('[data-day-edit]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const unitIdx = parseInt(btn.getAttribute('data-day-edit'), 10);
+          const pid = btn.getAttribute('data-product');
+          openDayPicker(pid, unitIdx);
+        });
+      });
     }
+
     document.getElementById('btnCloseHistory').addEventListener('click', () => historyModal.classList.remove('open'));
     historyModal.addEventListener('click', (e) => { if (e.target === historyModal) historyModal.classList.remove('open'); });
 
+    // ============================================
+    // MODAL SELECTOR DE DÍA
+    // ============================================
+    const dayPickerModal = document.getElementById('dayPickerModal');
+    const dayPickerGrid = document.getElementById('dayPickerGrid');
+    const dayPickerDesc = document.getElementById('dayPickerDesc');
+    let dayPickerProductId = null;
+    let dayPickerUnitIdx = null;
+
+    function openDayPicker(productId, unitIdx) {
+      dayPickerProductId = productId;
+      dayPickerUnitIdx = unitIdx;
+      const product = PRODUCTS[productId];
+      const units = getUnitsFIFO(product);
+      const unit = units[unitIdx];
+      if (!unit || !unit.sold) return;
+
+      const currentKey = unit.sale ? dayKeyFromTimestamp(unit.sale.timestamp) : null;
+      const todayKey = getTodayKey();
+
+      dayPickerDesc.innerHTML = `Selecciona el día para la venta <strong>#${unitIdx + 1}</strong> de ${escapeHTML(product.name)}.`;
+      dayPickerGrid.innerHTML = DAYS.map(d => {
+        const isSelected = currentKey === d.key;
+        const isToday = todayKey === d.key;
+        const classes = ['day-option'];
+        if (isSelected) classes.push('selected');
+        if (isToday && !isSelected) classes.push('today-option');
+        return `<button class="${classes.join(' ')}" data-day-key="${d.key}" data-product="${productId}" data-unit="${unitIdx}" title="${d.full}">${d.label}</button>`;
+      }).join('');
+
+      dayPickerGrid.querySelectorAll('[data-day-key]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const key = btn.getAttribute('data-day-key');
+          const pid = btn.getAttribute('data-product');
+          const idx = parseInt(btn.getAttribute('data-unit'), 10);
+          assignSaleDay(pid, idx, key);
+        });
+      });
+
+      dayPickerModal.classList.add('open');
+    }
+
+    document.getElementById('btnCancelDayPicker').addEventListener('click', () => dayPickerModal.classList.remove('open'));
+    dayPickerModal.addEventListener('click', (e) => { if (e.target === dayPickerModal) dayPickerModal.classList.remove('open'); });
+
+    // ============================================
+    // ASIGNAR DÍA A UNA VENTA
+    // --------------------------------------------
+    // Calcula la fecha del día seleccionado dentro de la semana actual,
+    // manteniendo la hora de la venta original (o usando mediodía si no existía).
+    // ============================================
+    function assignSaleDay(productId, unitIdx, targetDayKey) {
+      const product = PRODUCTS[productId];
+      if (!product) return;
+      const salesLog = Array.isArray(product.salesLog) ? product.salesLog : [];
+      if (unitIdx < 0 || unitIdx >= salesLog.length) {
+        showToast('Venta no encontrada.', 'danger');
+        return;
+      }
+
+      const monday = getMondayOfCurrentWeek();
+      const targetIdx = DAY_KEY_TO_INDEX[targetDayKey];
+      const mondayIdx = 1;
+      const diff = targetIdx - mondayIdx;
+      const newDate = new Date(monday);
+      newDate.setDate(monday.getDate() + diff);
+
+      // Conservar la hora original si existe, si no, poner mediodía
+      const original = salesLog[unitIdx];
+      const originalDate = original.timestamp ? new Date(original.timestamp) : null;
+      if (originalDate) {
+        newDate.setHours(originalDate.getHours(), originalDate.getMinutes(), originalDate.getSeconds(), 0);
+      } else {
+        newDate.setHours(12, 0, 0, 0);
+      }
+
+      salesLog[unitIdx].timestamp = newDate.getTime();
+
+      saveState();
+      renderAll();
+      // Re-render del historial para que se vea el cambio
+      renderHistoryTable(productId);
+
+      dayPickerModal.classList.remove('open');
+
+      const dayLabel = DAYS.find(d => d.key === targetDayKey);
+      showToast(`Día cambiado a ${dayLabel ? dayLabel.full : targetDayKey}`);
+    }
+
+    // ============================================
+    // MODAL ENTRADAS
+    // ============================================
     const entriesModal = document.getElementById('entriesModal');
     const entriesList = document.getElementById('entriesList');
 
@@ -2078,13 +2362,11 @@
       if (user) {
         console.log('Sesión iniciada:', user.email);
 
-        // Mostrar el nombre del usuario según su UID
         const displayName = getUserDisplayName(user.uid);
         if (displayName) {
           userName.textContent = displayName;
           userLabel.classList.add('visible');
         } else {
-          // Fallback: si el UID no está mapeado, muestra el correo
           userName.textContent = user.email || 'Usuario';
           userLabel.classList.add('visible');
         }
