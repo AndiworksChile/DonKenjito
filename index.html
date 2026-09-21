@@ -10,7 +10,6 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#fef9f2">
 
-  <!-- ÍCONO PARA PWA -->
   <link rel="apple-touch-icon" href="assets/iconapp.png">
   <link rel="icon" type="image/png" href="assets/iconapp.png">
   <link rel="manifest" href='data:application/manifest+json,{"name":"DonKenjito Inventario","short_name":"DonKenjito","start_url":"./","display":"standalone","background_color":"%23fef9f2","theme_color":"%23fef9f2","icons":[{"src":"assets/iconapp.png","sizes":"192x192","type":"image/png"},{"src":"assets/iconapp.png","sizes":"512x512","type":"image/png"}]}'>
@@ -31,9 +30,7 @@
       min-height: 100vh; color: #3e2e1f; overflow-x: hidden;
     }
 
-    /* ============================================
-       PANTALLA DE LOGIN
-       ============================================ */
+    /* LOGIN */
     .login-screen {
       position: fixed; inset: 0;
       background: linear-gradient(160deg, #fff6ec 0%, #ffe9d1 100%);
@@ -44,8 +41,6 @@
       overflow-y: auto;
     }
     .login-screen.hide { opacity: 0; visibility: hidden; pointer-events: none; }
-
-    /* Logo principal grande */
     .login-logo {
       width: 160px; height: 160px;
       display: flex; align-items: center; justify-content: center;
@@ -58,19 +53,12 @@
       display: block;
       filter: drop-shadow(0 8px 20px rgba(122, 77, 31, 0.12));
     }
-
     .login-title {
       font-size: 1.7rem; font-weight: 800;
       color: #7a4d1f; letter-spacing: -0.5px;
-      margin-bottom: 0.15rem;
+      margin-bottom: 1.5rem;
       text-align: center;
     }
-    .login-subtitle {
-      font-size: 0.78rem; color: #a5723e;
-      margin-bottom: 1.5rem; font-weight: 500;
-      text-align: center;
-    }
-
     .login-form {
       width: 100%; max-width: 340px;
       background: #fffaf4;
@@ -79,9 +67,7 @@
       border: 1px solid #f3d9b1;
       box-shadow: 0 12px 30px rgba(122, 77, 31, 0.1);
     }
-    .login-field {
-      margin-bottom: 0.9rem;
-    }
+    .login-field { margin-bottom: 0.9rem; }
     .login-field label {
       display: block; font-size: 0.72rem;
       font-weight: 600; color: #6b563e;
@@ -95,7 +81,6 @@
       outline: none; transition: border-color 0.15s ease;
     }
     .login-field input:focus { border-color: #c99b6a; }
-
     .login-btn {
       width: 100%; padding: 0.75rem;
       border: none; border-radius: 12px;
@@ -107,7 +92,6 @@
     }
     .login-btn:active { transform: scale(0.98); filter: brightness(0.95); }
     .login-btn:disabled { opacity: 0.6; cursor: wait; }
-
     .login-error {
       background: #fbe4e0; color: #c0392b;
       border-radius: 10px; padding: 0.5rem 0.7rem;
@@ -115,16 +99,13 @@
       display: none; line-height: 1.35;
     }
     .login-error.visible { display: block; }
-
     .login-hint {
       font-size: 0.65rem; color: #a58c6d;
       text-align: center; margin-top: 0.8rem;
       line-height: 1.4;
     }
 
-    /* ============================================
-       LANDING (post-login, carga inicial)
-       ============================================ */
+    /* LANDING */
     .landing {
       position: fixed; inset: 0;
       background: linear-gradient(160deg, #fff6ec 0%, #ffe9d1 100%);
@@ -152,9 +133,7 @@
     @keyframes load { 0% { width: 0%; } 40% { width: 55%; } 100% { width: 100%; } }
     .loader-text { font-size: 0.7rem; color: #a58c6d; margin-top: 0.8rem; letter-spacing: 0.5px; }
 
-    /* ============================================
-       APP
-       ============================================ */
+    /* APP */
     .app-container { max-width: 480px; width: 100%; opacity: 0; transition: opacity 0.5s ease; }
     .app-container.visible { opacity: 1; }
 
@@ -184,9 +163,41 @@
     }
     .logout-btn:active { background: #f5e8d5; }
 
-    .logo-area { display: flex; justify-content: center; align-items: center; margin: 0.25rem 0 0.4rem; }
+    /* Panel de diagnóstico (solo visible si hay error) */
+    .diag-panel {
+      display: none;
+      background: #fbe4e0;
+      border: 1px solid #f0c0b8;
+      border-radius: 10px;
+      padding: 0.6rem 0.8rem;
+      font-size: 0.68rem;
+      color: #8a2a1f;
+      margin: 0 0.2rem 0.6rem;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .diag-panel.visible { display: block; }
+    .diag-panel .title {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .diag-panel code {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: 0.62rem;
+    }
+
+    /* Solo logo, sin texto */
+    .logo-area {
+      display: flex; justify-content: center; align-items: center;
+      margin: 0.5rem 0 1rem;
+    }
     .logo-placeholder {
-      height: 56px;
+      height: 70px;
       display: flex; align-items: center; justify-content: center;
       padding: 0 0.5rem;
       overflow: hidden;
@@ -195,10 +206,8 @@
       height: 100%; width: auto;
       object-fit: contain;
       display: block;
+      filter: drop-shadow(0 4px 12px rgba(122, 77, 31, 0.08));
     }
-    .store-header { text-align: center; margin-bottom: 0.9rem; }
-    .store-name { font-size: 1.5rem; font-weight: 700; color: #7a4d1f; letter-spacing: -0.5px; line-height: 1.1; }
-    .store-tagline { font-size: 0.7rem; color: #a5723e; background: #fff1e0; display: inline-block; padding: 0.15rem 0.7rem; border-radius: 30px; margin-top: 0.15rem; font-weight: 500; }
 
     .summary-card {
       background: linear-gradient(135deg, #fff6ec 0%, #ffe9d1 100%);
@@ -457,15 +466,11 @@
 </head>
 <body>
 
-  <!-- ============================================
-       PANTALLA DE LOGIN
-       ============================================ -->
   <div class="login-screen" id="loginScreen">
     <div class="login-logo">
       <img src="assets/mainlogo.png" alt="DonKenjito" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-size:4rem\'>🐱</span>';">
     </div>
     <div class="login-title">DonKenjito</div>
-    <div class="login-subtitle">Acceso al inventario</div>
 
     <div class="login-form">
       <div class="login-field">
@@ -484,7 +489,6 @@
     </div>
   </div>
 
-  <!-- LANDING -->
   <div class="landing" id="landing">
     <div class="landing-logo">
       <img src="assets/mainlogo.png" alt="DonKenjito" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-size:4rem\'>🐱</span>';">
@@ -507,15 +511,17 @@
       </button>
     </div>
 
-    <div class="logo-area">
-      <div class="logo-placeholder">
-        <img src="assets/mainlogo.png" alt="DonKenjito" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-size:1.6rem\'>🐱</span>';">
-      </div>
+    <!-- Panel de diagnóstico (solo se muestra si hay error) -->
+    <div class="diag-panel" id="diagPanel">
+      <div class="title">⚠️ Problema de conexión</div>
+      <div id="diagMsg"></div>
     </div>
 
-    <div class="store-header">
-      <h1 class="store-name">DonKenjito</h1>
-      <div class="store-tagline">gestión de inventario</div>
+    <!-- Solo logo, sin texto -->
+    <div class="logo-area">
+      <div class="logo-placeholder">
+        <img src="assets/mainlogo.png" alt="DonKenjito" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-size:2rem\'>🐱</span>';">
+      </div>
     </div>
 
     <div class="summary-card">
@@ -666,21 +672,15 @@
 
   <div class="toast" id="toast"></div>
 
-  <!-- ============================================
-       FIREBASE SDK (modular vía CDN)
-       ============================================ -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import {
       getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
     import {
-      getDatabase, ref, onValue, set, off
+      getDatabase, ref, onValue, set, off, get
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-    // ============================================
-    // CONFIGURACIÓN DE FIREBASE
-    // ============================================
     const firebaseConfig = {
       apiKey: "AIzaSyB6z259SEcG-Cn6qFLqjTA9qUpzCccsRRk",
       authDomain: "donkenjito.firebaseapp.com",
@@ -695,14 +695,12 @@
     const auth = getAuth(app);
     const db = getDatabase(app);
 
-    // ============================================
-    // ESTADO
-    // ============================================
     const DEFAULT_ICONS = ['🧻', '📄', '🥤', '🍪', '🥛', '🥚', '🍎', '🐟', '🧴', '🧼', '🍞', '📦', '🎀', '📎', '🩹', '🍬'];
     let PRODUCTS = {};
     let dbRef = null;
     let unsubDb = null;
     let currentUser = null;
+    let initialFirebaseLoadDone = false;
 
     function uid() {
       return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -726,9 +724,6 @@
       };
     }
 
-    // ============================================
-    // UTILIDADES
-    // ============================================
     function formatCLP(value) {
       const rounded = Math.round(value);
       const formatted = new Intl.NumberFormat('es-CL', {
@@ -756,9 +751,6 @@
       }, type ? 2600 : 1900);
     }
 
-    // ============================================
-    // HELPERS MATEMÁTICOS
-    // ============================================
     function getTotalEntered(product) {
       return product.entries.reduce((acc, e) => acc + e.qty, 0);
     }
@@ -831,11 +823,8 @@
       return { income, expense, balance: income - expense };
     }
 
-    // ============================================
-    // SANITIZAR
-    // ============================================
     function sanitizeProducts(raw) {
-      if (!raw || typeof raw !== 'object') return createFreshState();
+      if (!raw || typeof raw !== 'object') return {};
       const clean = {};
       Object.keys(raw).forEach(k => {
         const p = raw[k] || {};
@@ -864,17 +853,35 @@
       return clean;
     }
 
-    // ============================================
-    // SYNC STATUS
-    // ============================================
-    function updateSyncStatus(status) {
+    function updateSyncStatus(status, errorMsg) {
       const dot = document.getElementById('syncDot');
       const txt = document.getElementById('syncText');
+      const diag = document.getElementById('diagPanel');
+      const diagMsg = document.getElementById('diagMsg');
+
       dot.classList.remove('online', 'offline', 'syncing');
-      if (status === 'online') { dot.classList.add('online'); txt.textContent = 'Sincronizado'; }
+      if (status === 'online') { dot.classList.add('online'); txt.textContent = 'Sincronizado'; diag.classList.remove('visible'); }
       else if (status === 'offline') { dot.classList.add('offline'); txt.textContent = 'Sin conexión'; }
-      else if (status === 'syncing') { dot.classList.add('syncing'); txt.textContent = 'Sincronizando…'; }
+      else if (status === 'syncing') { dot.classList.add('syncing'); txt.textContent = 'Sincronizando…'; diag.classList.remove('visible'); }
       else { txt.textContent = 'Conectando…'; }
+
+      if (status === 'offline' && errorMsg) {
+        diag.classList.add('visible');
+        // Traducir mensajes comunes de Firebase a algo entendible
+        let friendly = errorMsg;
+        if (errorMsg.includes('permission_denied') || errorMsg.includes('permission-denied')) {
+          friendly = 'Firebase rechazó la lectura. Verifica que las <strong>reglas de Realtime Database</strong> sean <code>{".read": "auth != null", ".write": "auth != null"}</code> y estén publicadas.';
+        } else if (errorMsg.includes('unauthorized-domain')) {
+          friendly = 'Este dominio no está autorizado en Firebase Auth. Agrégalo en <strong>Authentication → Settings → Authorized domains</strong>.';
+        } else if (errorMsg.includes('Failed to fetch') || errorMsg.includes('network')) {
+          friendly = 'Sin conexión a internet o la URL de la base de datos no responde. Verifica tu conexión.';
+        } else if (errorMsg.includes('404') || errorMsg.includes('not found')) {
+          friendly = 'La base de datos no existe. Créala en <strong>Realtime Database</strong> en la consola de Firebase.';
+        }
+        diagMsg.innerHTML = friendly;
+      } else if (status === 'online') {
+        diag.classList.remove('visible');
+      }
     }
 
     async function pushToFirebase() {
@@ -885,31 +892,48 @@
         updateSyncStatus('online');
       } catch (e) {
         console.error('Error subiendo:', e);
-        updateSyncStatus('offline');
+        updateSyncStatus('offline', e.message || String(e));
       }
     }
 
     function subscribeToFirebase() {
       if (dbRef) off(dbRef);
       dbRef = ref(db, 'products');
+
+      // Primero hacemos una lectura única para saber si la base está vacía
+      get(dbRef).then((snapshot) => {
+        const data = snapshot.val();
+        if (!data || Object.keys(data).length === 0) {
+          // Base vacía: subir el estado local por primera vez
+          console.log('Base vacía, subiendo estado inicial...');
+          pushToFirebase();
+        }
+      }).catch((e) => {
+        console.error('Error en lectura inicial:', e);
+        updateSyncStatus('offline', e.message || String(e));
+      });
+
+      // Luego suscripción en vivo
       unsubDb = onValue(dbRef, (snapshot) => {
         const data = snapshot.val();
         if (data && Object.keys(data).length > 0) {
           PRODUCTS = sanitizeProducts(data);
-          updateSyncStatus('online');
         } else {
-          updateSyncStatus('online');
+          // Si Firebase está vacío pero tenemos datos locales con contenido,
+          // los empujamos para no perder trabajo previo
+          if (Object.keys(PRODUCTS).length === 0 || initialFirebaseLoadDone) {
+            // Nada que hacer
+          }
         }
+        initialFirebaseLoadDone = true;
+        updateSyncStatus('online');
         renderAll();
       }, (error) => {
         console.error('Error suscribiendo:', error);
-        updateSyncStatus('offline');
+        updateSyncStatus('offline', error.message || String(error));
       });
     }
 
-    // ============================================
-    // PERSISTENCIA (debounce)
-    // ============================================
     let pushTimer = null;
     function saveState() {
       try { localStorage.setItem('donkenjito_cache_v1', JSON.stringify(PRODUCTS)); } catch(e) {}
@@ -925,9 +949,6 @@
       } catch (e) { return null; }
     }
 
-    // ============================================
-    // RENDER
-    // ============================================
     function renderProductsList() {
       const container = document.getElementById('productsList');
       const openPanels = new Set();
@@ -1080,9 +1101,6 @@
       }
     }
 
-    // ============================================
-    // EVENTOS
-    // ============================================
     function attachEvents() {
       document.querySelectorAll('[data-toggle]').forEach(row => {
         row.addEventListener('click', (e) => {
@@ -1148,9 +1166,6 @@
       });
     }
 
-    // ============================================
-    // OPERACIONES
-    // ============================================
     function sellOne(productId) {
       const product = PRODUCTS[productId];
       if (getStock(product) <= 0) {
@@ -1295,9 +1310,6 @@
       return id;
     }
 
-    // ============================================
-    // MODALES
-    // ============================================
     const stockModal = document.getElementById('stockModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalDesc = document.getElementById('modalDesc');
@@ -1550,9 +1562,6 @@
 
     document.getElementById('addProductCard').addEventListener('click', openNewProductModal);
 
-    // ============================================
-    // AUTENTICACIÓN
-    // ============================================
     const loginScreen = document.getElementById('loginScreen');
     const loginEmail = document.getElementById('loginEmail');
     const loginPassword = document.getElementById('loginPassword');
